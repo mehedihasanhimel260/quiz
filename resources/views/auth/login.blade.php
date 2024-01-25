@@ -22,14 +22,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+    <link href="{{ asset('inc/backend') }}/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="{{ asset('inc/backend') }}/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset('inc/backend') }}/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="{{ asset('inc/backend') }}/css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -54,7 +54,7 @@
                         <div class="bg-secondary rounded p-4 p-sm-5 my-4 mx-3">
                             <div class="d-flex align-items-center justify-content-between mb-3">
                                 <a href="index.html" class="">
-                                    <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>DarkPan</h3>
+                                    <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>Quizz</h3>
                                 </a>
                                 <h3>Sign In</h3>
                             </div>
@@ -76,7 +76,7 @@
                                 <a href="">Forgot Password</a>
                             </div>
                             <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Sign In</button>
-                            <p class="text-center mb-0">Don't have an Account? <a href="">Sign Up</a></p>
+                            <p class="text-center mb-0">Don't have an Account? <a href="{{ route('register') }}">Sign Up</a></p>
                         </div>
                     </form>
                 </div>
@@ -88,16 +88,16 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/chart/chart.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="lib/tempusdominus/js/moment.min.js"></script>
-    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="{{ asset('inc/backend') }}/lib/chart/chart.min.js"></script>
+    <script src="{{ asset('inc/backend') }}/lib/easing/easing.min.js"></script>
+    <script src="{{ asset('inc/backend') }}/lib/waypoints/waypoints.min.js"></script>
+    <script src="{{ asset('inc/backend') }}/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="{{ asset('inc/backend') }}/lib/tempusdominus/js/moment.min.js"></script>
+    <script src="{{ asset('inc/backend') }}/lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="{{ asset('inc/backend') }}/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    <script src="{{ asset('inc/backend') }}/js/main.js"></script>
 </body>
 
 </html>

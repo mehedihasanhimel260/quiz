@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\QuizController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -15,9 +18,28 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+
+Route::prefix('quiz')
+    ->controller(QuizController::class)
+    ->group(function () {
+        Route::get('/', 'index')->name('quiz.index');
+        Route::post('/store', 'store')->name('quiz.store');
+        Route::get('/edit/{id}', 'edit')->name('quiz.edit');
+        Route::get('/destroy/{id}', 'destroy')->name('quiz.destroy');
+    });
+
+    Route::prefix('question')
+        ->controller(QuestionController::class)
+        ->group(function () {
+            Route::get('/', 'index')->name('question.index');
+            Route::post('/store', 'store')->name('question.store');
+            Route::get('/edit/{id}', 'edit')->name('question.edit');
+            Route::get('/destroy/{id}', 'destroy')->name('question.destroy');
+        });
