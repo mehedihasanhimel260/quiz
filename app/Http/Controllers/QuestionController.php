@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Option;
 use App\Models\Question;
 use App\Models\quiz;
 use Illuminate\Http\Request;
@@ -16,7 +17,12 @@ class QuestionController extends Controller
         $quizs = quiz::latest()->get();
         $quizss = quiz::latest()->paginate(1);
         $questions = Question::latest()->get();
-        return view('admin.question.index', compact('questions', 'quizs', 'quizss'));
+        $latestquestions = Question::latest()->first();
+        $options = Option::where('question_id', $latestquestions->id)
+            ->latest()
+            ->get();
+        $data = compact('questions', 'quizs', 'quizss', 'latestquestions', 'options');
+        return view('admin.question.index', $data);
     }
 
     public function store(Request $request)
@@ -48,6 +54,7 @@ class QuestionController extends Controller
     {
         $quizs = quiz::latest()->get();
         $questions = Question::find($id);
+
         return view('admin.question.edit', compact('questions', 'quizs'));
     }
 

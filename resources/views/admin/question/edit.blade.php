@@ -9,6 +9,7 @@
                     <form action="{{ route('question.store') }}" method="POST">
                         @csrf
                         <input type="hidden" name="id" value=" {{ $questions->id }}">
+                        <input type="hidden" name="id" value=" {{ $questions->id }}">
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Select Quizz Name</label>
                             <select class="form-select form-select-sm mb-3" name="quiz_id"
@@ -36,5 +37,4 @@
 
         </div>
         <!-- Form End -->
-    @endsection
     @endsection
