@@ -8,6 +8,7 @@
                     <h6 class="mb-4">Carete Quizz Qustion</h6>
                     <form action="{{ route('question.store') }}" method="POST">
                         @csrf
+                        <input type="hidden" name="id" value=" {{ $questions->id }}">
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Select Quizz Name</label>
                             <select class="form-select form-select-sm mb-3" name="quiz_id"
@@ -22,6 +23,7 @@
 
                         </div>
                         <div class="mb-3">
+
                             <label for="exampleInputEmail1" class="form-label"> Quizz Qustion</label>
                             <input type="text" name="text_ques" value=" {{ $questions->text_ques }}" class="form-control"
                                 name="title" id="exampleInputEmail1" aria-describedby="emailHelp">
@@ -34,4 +36,5 @@
 
         </div>
         <!-- Form End -->
+    @endsection
     @endsection
