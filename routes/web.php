@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\ExamMaintainController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OptionController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\QuizController;
+use App\Http\Controllers\TimeCounDownController;
+use App\Http\Controllers\UserResponseController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +28,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-
 Route::prefix('quiz')
     ->controller(QuizController::class)
     ->group(function () {
@@ -33,6 +35,7 @@ Route::prefix('quiz')
         Route::post('/store', 'store')->name('quiz.store');
         Route::get('/edit/{id}', 'edit')->name('quiz.edit');
         Route::get('/destroy/{id}', 'destroy')->name('quiz.destroy');
+        Route::get('quiz/exam/{id}', 'quiz_exam')->name('quiz.exam');
     });
 
 Route::prefix('question')
@@ -51,3 +54,14 @@ Route::prefix('option')
         Route::get('/edit/{id}', 'edit')->name('option.edit');
         Route::get('/destroy/{id}', 'destroy')->name('option.destroy');
     });
+
+// use for user
+
+Route::prefix('user/quiz')
+    ->controller(ExamMaintainController::class)
+    ->group(function () {
+        Route::get('/exam/{id}', 'quiz_exam')->name('userQuiz.exam');
+        Route::get('/start-Exam/{id}', 'startexam')->name('start.exam');
+    }); // use for user
+
+Route::post('user/response/', [UserResponseController::class, 'store'])->name('userResponse.store');

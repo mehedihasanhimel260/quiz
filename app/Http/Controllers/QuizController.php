@@ -46,4 +46,5 @@ class QuizController extends Controller
             ->route('quiz.index')
             ->with('error', 'Quiz Deleted successfully.');
     }
+   
 }
