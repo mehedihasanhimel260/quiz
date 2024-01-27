@@ -68,7 +68,7 @@
             document.getElementById("demo").innerHTML = minutes + "m " + seconds + "s ";
             if (distance < 0) {
                 clearInterval(x);
-                document.getElementById("demo").innerHTML = "EXPIRED";
+                window.location.replace("{{ url('user/quiz/exam/' . $quiz->id) }}");
             }
         }, 1000);
     </script>

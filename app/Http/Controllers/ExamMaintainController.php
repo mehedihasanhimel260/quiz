@@ -15,8 +15,13 @@ class ExamMaintainController extends Controller
     public function quiz_exam($id)
     {
         $quiz = quiz::find($id);
-        $UserResponse =UserResponse::where('user_id', Auth::user()->id)->where('quiz_id', $id)->get();
-        return view('admin.quizz.view', compact('quiz','UserResponse'));
+        $UserResponse = UserResponse::where('user_id', Auth::user()->id)
+            ->where('quiz_id', $id)
+            ->get();
+        $questions = Question::where('quiz_id', $id)
+            ->latest()
+            ->get();
+        return view('admin.quizz.view', compact('quiz', 'UserResponse', 'questions'));
     }
     public function startexam($id)
     {
