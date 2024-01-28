@@ -10,9 +10,9 @@
                         @csrf
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Select Quizz Name</label>
-                            <select class="form-select form-select-sm mb-3" name="quiz_id"
+                            <select class="form-select form-select-sm mb-3" name="quiz_id" required
                                 aria-label=".form-select-sm example">
-                                <option selected="">Open this select Quiz</option>
+
                                 @foreach ($quizs as $quiz)
                                     <option value="{{ $quiz->id }}">{{ $quiz->title }}</option>
                                 @endforeach
@@ -37,19 +37,20 @@
                         @csrf
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Qustion</label>
-                            <h3>{{ $latestquestions->text_ques }}</h3>
-                            <input type="hidden" name="question_id" value="{{ $latestquestions->id }}">
-                            @foreach ($options as $option)
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                        id="flexRadioDefault2" {{ $option->is_correct == 1 ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="flexRadioDefault2">
-                                        {{ $option->text }} <a href="{{ route('option.edit', $option->id) }}">Edit</a> / <a
-                                            href="{{ route('option.destroy', $option->id) }}">Delete</a>
-                                    </label>
-                                </div>
-                               
-                            @endforeach
+                            <h3>{{ $latestquestions->text_ques ?? null }}</h3>
+                            <input type="hidden" name="question_id" value="{{ $latestquestions->id ?? null }}">
+                            @if ($options)
+                                @foreach ($options as $option)
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                            id="flexRadioDefault2" {{ $option->is_correct == 1 ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                            {{ $option->text }} <a href="{{ route('option.edit', $option->id) }}">Edit</a> /
+                                            <a href="{{ route('option.destroy', $option->id) }}">Delete</a>
+                                        </label>
+                                    </div>
+                                @endforeach
+                            @endif
 
                         </div>
                         <div class="mb-3">
@@ -87,28 +88,30 @@
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @php
-                                    $filtering = $questions->filter(function ($question) use ($quiz) {
-                                        return $question->quiz_id == $quiz->id;
-                                    });
+                            @if ($questions)
+                                <tbody>
+                                    @php
+                                        $filtering = $questions->filter(function ($question) use ($quiz) {
+                                            return $question->quiz_id == $quiz->id;
+                                        });
 
-                                @endphp
-                                @foreach ($filtering as $question)
-                                    <tr>
-                                        <th scope="row">{{ $loop->iteration }}</th>
-                                        <td>{{ $question->text_ques }}</td>
-                                        <td>
-                                            <div class="btn-group" role="group">
-                                                <a href="{{ route('question.edit', $question->id) }}"
-                                                    class="btn btn-outline-primary">Edit </a>
-                                                <a href="{{ route('question.destroy', $question->id) }}"
-                                                    class="btn btn-outline-primary">Delete </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
+                                    @endphp
+                                    @foreach ($filtering as $question)
+                                        <tr>
+                                            <th scope="row">{{ $loop->iteration }}</th>
+                                            <td>{{ $question->text_ques }}</td>
+                                            <td>
+                                                <div class="btn-group" role="group">
+                                                    <a href="{{ route('question.edit', $question->id) }}"
+                                                        class="btn btn-outline-primary">Edit </a>
+                                                    <a href="{{ route('question.destroy', $question->id) }}"
+                                                        class="btn btn-outline-primary">Delete </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            @endif
                         </table>
                     </div>
                 </div>
