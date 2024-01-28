@@ -17,10 +17,16 @@ class QuestionController extends Controller
         $quizs = quiz::latest()->get();
         $quizss = quiz::latest()->paginate(1);
         $questions = Question::latest()->get();
-        $latestquestions = Question::latest()->first();
-        $options = Option::where('question_id', $latestquestions->id)
-            ->latest()
-            ->get();
+        $latestquestions = null;
+        $options = null;
+
+        if ($questions->isNotEmpty()) {
+            $latestquestions = $questions->first();
+            $options = Option::where('question_id', $latestquestions->id)
+                ->latest()
+                ->get();
+        }
+
         $data = compact('questions', 'quizs', 'quizss', 'latestquestions', 'options');
         return view('admin.question.index', $data);
     }
